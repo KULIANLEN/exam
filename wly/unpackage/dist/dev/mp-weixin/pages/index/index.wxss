@@ -1,0 +1,33 @@
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}.bold {
+	font-weight: 700;
+}.tittle {
+	font-size: larger;
+	margin: 8rpx;
+}.time {
+	font-size: samll;
+}.excel-tittle {
+	font-size: large;
+	margin: 40rpx;
+}.interval {
+	/* 项目标题和内容间距 */
+	margin-bottom: 10rpx;
+}.card {
+	/* 项目 */
+	padding: 20rpx;
+	margin-left: 50rpx;
+	margin-right: 50rpx;
+	margin-bottom: 35rpx;
+	background-color: rgba(242, 242, 242, 0.5);
+	border-radius: 20rpx;
+}.radio-card{
+	display: flex;
+	flex-wrap: nowrap;
+}.radio{
+	margin-right: 20rpx;
+}
+
