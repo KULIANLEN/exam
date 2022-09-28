@@ -3,7 +3,7 @@
 		<u-form :model="form" ref="uForm">
 			<u-form-item label="请假类型" label-width="150rpx">
 				<u-radio-group v-model="radio4">
-					<u-radio v-for="(item, index) in radioList4" :key="index" :name="item.name"
+					<u-radio v-for="(item, index) in radioList4" :key="index" :name="item.value"
 						:disabled="item.disabled" @change="radio4GroupChange">
 						{{ item.name }}
 					</u-radio>
@@ -17,7 +17,7 @@
 			</u-form-item>
 			<u-form-item label="是否外出" label-width="200rpx">
 				<u-radio-group v-model="radio">
-					<u-radio v-for="(item, index) in radioList" :key="index" :name="item.name" :disabled="item.disabled"
+					<u-radio v-for="(item, index) in radioList" :key="index" :name="item.value" :disabled="item.disabled"
 						@change="radioGroupChange">
 						{{ item.name }}
 					</u-radio>
@@ -25,45 +25,45 @@
 			</u-form-item>
 			<u-form-item label="是否出兰" label-width="200rpx">
 				<u-radio-group v-model="radio2">
-					<u-radio v-for="(item, index) in radioList2" :key="index" :name="item.name"
+					<u-radio v-for="(item, index) in radioList2" :key="index" :name="item.value"
 						:disabled="item.disabled" @change="radio2GroupChange">
 						{{ item.name }}
 					</u-radio>
 				</u-radio-group>
 			</u-form-item>
-			<u-form-item label="目的地" prop='destination' label-width="200rpx" v-show="radio2=='是'">
+			<u-form-item label="目的地" prop='destination' label-width="200rpx" v-show="radio2=='1'">
 				<u-input v-model="form.destination" />
 			</u-form-item>
-			<u-form-item label="所乘交通工具" label-width="200rpx" v-show="radio2=='是'">
+			<u-form-item label="所乘交通工具" label-width="200rpx" v-show="radio2=='1'">
 				<u-radio-group v-model="radio3">
-					<u-radio v-for="(item, index) in radioList3" :key="index" :name="item.name"
+					<u-radio v-for="(item, index) in radioList3" :key="index" :name="item.value"
 						:disabled="item.disabled" @change="radio3GroupChange">
 						{{ item.name }}
 					</u-radio>
 				</u-radio-group>
 			</u-form-item>
-			<u-form-item label="车次/航班号/车牌号" prop='number' label-width="300rpx" v-show="radio2=='是'">
+			<u-form-item label="车次/航班号/车牌号" prop='number' label-width="300rpx" v-show="radio=='1'">
 				<u-input v-model="form.number" />
 			</u-form-item>
 			</u-form-item>
-			<u-form-item label="途径地" prop='onTheWay' label-width="200rpx" v-show="radio2=='是'">
+			<u-form-item label="途径地" prop='onTheWay' label-width="200rpx" v-show="radio=='1'">
 				<u-input v-model="form.onTheWay" />
 			</u-form-item>
 			</u-form-item>
-			<u-form-item label="乘车开始时间" prop='carStartTime' label-width="200rpx" v-show="radio2=='是'">
+			<u-form-item label="乘车开始时间" prop='carStartTime' label-width="200rpx" v-show="radio=='1'">
 				<u-input v-model="form.carStartTime" />
 			</u-form-item>
 			</u-form-item>
-			<u-form-item label="乘车结束时间" prop='carEndTime' label-width="200rpx" v-show="radio2=='是'">
+			<u-form-item label="乘车结束时间" prop='carEndTime' label-width="200rpx" v-show="radio=='1'">
 				<u-input v-model="form.carEndTime" />
 			</u-form-item>
-			<u-form-item label="紧急联系人" prop='urgencyMan' label-width="200rpx">
+			<u-form-item label="紧急联系人" prop='urgencyMan' label-width="200rpx" v-show="radio=='1'">
 				<u-input v-model="form.urgencyMan" />
 			</u-form-item>
-			<u-form-item label="与请假人关系" prop='relevant' label-width="200rpx">
+			<u-form-item label="与请假人关系" prop='relevant' label-width="200rpx" v-show="radio=='1'">
 				<u-input v-model="form.relevant" />
 			</u-form-item>
-			<u-form-item label="紧急联系人电话" prop='urgencyManPhoneNumber' label-width="220rpx">
+			<u-form-item label="紧急联系人电话" prop='urgencyManPhoneNumber' label-width="220rpx" v-show="radio=='1'">
 				<u-input v-model="form.urgencyManPhoneNumber" />
 			</u-form-item>
 			<u-form-item label="本人QQ号码" prop='qq' label-width="200rpx">
@@ -107,141 +107,84 @@
 					wx: '',
 					happen: '',
 				},
-				rules: {
-					startTime: [{
-						required: true,
-						message: '请输入请假开始时间',
-						// 可以单个或者同时写两个触发验证方式 
-						trigger: ['change', 'blur'],
-					}],
-					happen: [{
-						min: 5,
-						required: true,
-						message: '请假事由不能少于5个字',
-						trigger: ['change', 'blur'],
-					}],
-					endTime: [{
-						required: true,
-						message: '请输入请假结束时间',
-						trigger: ['change', 'blur'],
-					}],
-					destination: [{
-						required: true,
-						message: '请输入目的地',
-						trigger: ['change', 'blur'],
-					}],
-					number: [{
-						required: true,
-						message: '请输入车次/航班号/车牌号',
-						trigger: ['change', 'blur'],
-					}],
-					onTheWay: [{
-						required: true,
-						message: '请输入途径地',
-						trigger: ['change', 'blur'],
-					}],
-					carStartTime: [{
-						required: true,
-						message: '请输入乘车开始时间',
-						trigger: ['change', 'blur'],
-					}],
-					carEndTime: [{
-						required: true,
-						message: '请输入乘车结束时间',
-						trigger: ['change', 'blur'],
-					}],
-					urgencyMan: [{
-						required: true,
-						message: '请输入紧急联系人姓名',
-						trigger: ['change', 'blur'],
-					}],
-					relevant: [{
-						required: true,
-						message: '请输入与请假人关系',
-						trigger: ['change', 'blur'],
-					}],
-					urgencyManPhoneNumber: [{
-						required: true,
-						message: '请输入紧急联系人电话',
-						trigger: ['change', 'blur'],
-					}],
-					qq: [{
-						required: true,
-						message: '请输入本人qq号',
-						trigger: ['change', 'blur'],
-					}],
-					phoneNumber: [{
-						required: true,
-						message: '请输入本人电话号码',
-						trigger: ['change', 'blur'],
-					}],
-					wx: [{
-						required: true,
-						message: '请输入本人微信号码',
-						trigger: ['change', 'blur'],
-					}],
-				},
+				
 				buttonStyle: {
 					marginRight: '40px', // 注意驼峰命名，并且值必须用引号包括，因为这是对象
 				},
 				radioList: [{
 						name: '是',
-						disabled: false
+						disabled: false,
+						value:'1'
 					},
 					{
 						name: '否',
-						disabled: false
+						disabled: false,
+						value:'0'
 					}
 				],
 				radioList2: [{
 						name: '是',
-						disabled: false
+						disabled: false,
+						value:'1'
 					},
 					{
 						name: '否',
-						disabled: false
+						disabled: false,
+						value:'0'
 					}
 				],
 				radioList3: [{
 						name: '飞机',
-						disabled: false
+						disabled: false,
+						value:'0'
 					},
 					{
 						name: '火车',
-						disabled: false
+						disabled: false,
+						value:'1'
 					},
 					{
 						name: '其他',
-						disabled: false
+						disabled: false,
+						value:'2'
 					}
 				],
 				radioList4: [{
 					name: '实习',
-					disabled: false
+					disabled: false,
+					value:'01'
 				}, {
 					name: '返家',
-					disabled: false
+					disabled: false,
+					value:'03'
 				}, {
 					name: '旅游',
-					disabled: false
+					disabled: false,
+					value:'05'
 				}, {
 					name: '病假',
-					disabled: false
+					disabled: false,
+					value:'06'
 				}, {
 					name: '事假',
-					disabled: false
+					disabled: false,
+					value:'07'
 				}, {
 					name: '医学南校区',
-					disabled: false
+					disabled: false,
+					value:'08'
 				}, {
 					name: '其他',
-					disabled: false
+					disabled: false,
+					value:'09'
 				}, {
 					name: '毕业离校',
-					disabled: false
+					disabled: false,
+					value:'15'
 				}, {
 					name: '寒暑假离家',
-					disabled: false
+					disabled: false,
+					value:'20'
 				}, ],
 				radio: '',
 				radio2: '',
@@ -250,57 +193,101 @@
 				switchVal: false
 			};
 		},
+		onLoad(res) {
+			let that = this;
+			setInterval(function(){
+				uni.setStorageSync('startTime',that.startTime)
+				uni.setStorageSync('endTime',that.endTime)
+				uni.setStorageSync('destination',that.destination)
+				uni.setStorageSync('number',that.number)
+				uni.setStorageSync('onTheWay',that.onTheWay)
+				uni.setStorageSync('carStarTime',that.carStartTime)
+				uni.setStorageSync('carEndTime',that.carEndTime)
+				uni.setStorageSync('urgencyMan',that.urgencyMan)
+				uni.setStorageSync('relevant',that.relevant)
+				uni.setStorageSync('urgencyManPhoneNumber',that.urgencyManPhoneNumber)
+				uni.setStorageSync('qq',that.qq)
+				uni.setStorageSync('phoneNumber',that.phoneNumber)
+				uni.setStorageSync('wx',that.wx)
+				uni.setStorageSync('happen',that.happen)
+				uni.setStorageSync('goout',that.radio)
+				uni.setStorageSync('outLan',that.radio2)
+				uni.setStorageSync('vehicle',that.radio3)
+				uni.setStorageSync('Type',that.radio4)
+			},2000)
+		},
+		onShow() {
+			this.startTime = uni.getStorageSync('startTime')
+			this.endTime = uni.getStorageSync('endTime')
+			this.destination = uni.getStorageSync('destination')
+			this.number = uni.getStorageSync('number')
+			this.onTheWay = uni.getStorageSync('onTheWay')
+			this.carStartTime = uni.getStorageSync('carStartTime')
+			this.carEndTime = uni.getStorageSync('carEndTime')
+			this.urgencyMan = uni.getStorageSync('urgencyMan')
+			this.urgencyManPhoneNumber = uni.getStorageSync('urgencyManPhoneNumber')
+			this.qq = uni.getStorageSync('qq')
+			this.phoneNumber = uni.getStorageSync('phoneNumber')
+			this.wx = uni.getStorageSync('wx')
+			this.happen = uni.getStorageSync('happen')
+			this.radio = uni.getStorageSync('goout')
+			this.radio2 = uni.getStorageSync('outLan')
+			this.radio3 = uni.getStorageSync('vehicle')
+			this.radio4 = uni.getStorageSync('Type')
+		},
 		methods: {
 			// 选中某个单选框时，由radio时触发
 			radioGroupChange(e) {
-				console.log(e);
+				this.radio = e
 			},
 			radio2GroupChange(r) {
-				console.log(r);
-			},
+				this.radio2 = r			},
 			radio3GroupChange(t) {
-				console.log(t);
+				this.radio3 = t
 			},
 			radio4GroupChange(y) {
-				console.log(y);
-			},
+				this.radio4 = y
+				console.log(this.radio4)
+				},			
 			submit() {
+				console.log(this.radio4)
 				if (this.switchVal == true) {
 					this.$refs.uForm.validate(valid => {
 						if (valid) {
 							console.log('验证通过');
-							let that = this
+							
 							uni.request({
-								url: '',
-								method: 'POST',
+								url: 'http://127.0.0.1:8000/tableSubmit/dayoffSubmit',
+								method: 'GET',
 								data: {
-									startTime: that.startTime,
-									endTime: that.endTime,
-									destination: that.destination,
-									number: that.number,
-									onTheWay: that.onTheWay,
-									carStartTime: that.carStartTime,
-									carEndTime: that.carEndTime,
-									urgencyMan: that.urgencyMan,
-									relevant: that.relevant,
-									urgencyManPhoneNumber: that.urgencyManPhoneNumber,
-									qq: that.qq,
-									phoneNumber: that.phoneNumber,
-									wx: that.wx,
-									happen: that.happen,
-									goout: that.radio,
-									outLan: that.radio2,
-									vehicle: that.radio3,
-									Type: that.radio4,
+									startTime: this.form.startTime,
+									endTime: this.form.endTime,
+									destination: this.form.destination,
+									number: this.form.number,
+									onTheWay: this.form.onTheWay,
+									carStartTime: this.form.carStartTime,
+									carEndTime: this.form.carEndTime,
+									urgencyMan: this.form.urgencyMan,
+									relevant: this.form.relevant,
+									urgencyManPhoneNumber: this.form.urgencyManPhoneNumber,
+									qq: this.form.qq,
+									phoneNumber: this.form.phoneNumber,
+									wx: this.form.wx,
+									happen: this.form.happen,
+									goout: this.radio,
+									outLan: this.radio2,
+									vehicle: this.radio3,
+									Type: this.radio4,
 								},
 								success: (res) => {
 									if (res.data.status_code == 100) {
 										uni.showToast({
-											title: '提交成功'
+											title: this.form.wx
 										})
 									} else {
 										uni.showToast({
 											title: '提交失败，请稍后重试'
+											
 										})
 									}
 								}

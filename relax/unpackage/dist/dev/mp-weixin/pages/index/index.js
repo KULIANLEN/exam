@@ -103,23 +103,20 @@ try {
     uFormItem: function() {
       return Promise.all(/*! import() | uview-ui/components/u-form-item/u-form-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-form-item/u-form-item")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-form-item/u-form-item.vue */ 56))
     },
-    uCheckboxGroup: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-checkbox-group/u-checkbox-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-checkbox-group/u-checkbox-group")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox-group/u-checkbox-group.vue */ 74))
-    },
-    uCheckbox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-checkbox/u-checkbox */ "uview-ui/components/u-checkbox/u-checkbox").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox/u-checkbox.vue */ 81))
-    },
-    uInput: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 67))
-    },
     uRadioGroup: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-radio-group/u-radio-group.vue */ 88))
+      return Promise.all(/*! import() | uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-radio-group/u-radio-group.vue */ 67))
     },
     uRadio: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-radio/u-radio */ "uview-ui/components/u-radio/u-radio").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-radio/u-radio.vue */ 95))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-radio/u-radio */ "uview-ui/components/u-radio/u-radio").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-radio/u-radio.vue */ 74))
+    },
+    uInput: function() {
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 81))
     },
     uSwitch: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-switch/u-switch */ "uview-ui/components/u-switch/u-switch").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-switch/u-switch.vue */ 102))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-switch/u-switch */ "uview-ui/components/u-switch/u-switch").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-switch/u-switch.vue */ 88))
+    },
+    uButton: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 95))
     }
   }
 } catch (e) {
@@ -176,7 +173,67 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -210,62 +267,275 @@ var _default =
   data: function data() {
     return {
       form: {
-        starttime: '',
-        endtime: '' },
+        startTime: '',
+        endTime: '',
+        destination: '',
+        number: '',
+        onTheWay: '',
+        carStartTime: '',
+        carEndTime: '',
+        urgencyMan: '',
+        relevant: '',
+        urgencyManPhoneNumber: '',
+        qq: '',
+        phoneNumber: '',
+        wx: '',
+        happen: '' },
 
-      checkboxList: [{
-        name: '实习',
-        checked: false,
+      rules: {
+        startTime: [{
+          required: true,
+          message: '请输入请假开始时间',
+          // 可以单个或者同时写两个触发验证方式 
+          trigger: ['change', 'blur'] }],
+
+        happen: [{
+          min: 5,
+          required: true,
+          message: '请假事由不能少于5个字',
+          trigger: ['change', 'blur'] }],
+
+        endTime: [{
+          required: true,
+          message: '请输入请假结束时间',
+          trigger: ['change', 'blur'] }],
+
+        destination: [{
+          required: true,
+          message: '请输入目的地',
+          trigger: ['change', 'blur'] }],
+
+        number: [{
+          required: true,
+          message: '请输入车次/航班号/车牌号',
+          trigger: ['change', 'blur'] }],
+
+        onTheWay: [{
+          required: true,
+          message: '请输入途径地',
+          trigger: ['change', 'blur'] }],
+
+        carStartTime: [{
+          required: true,
+          message: '请输入乘车开始时间',
+          trigger: ['change', 'blur'] }],
+
+        carEndTime: [{
+          required: true,
+          message: '请输入乘车结束时间',
+          trigger: ['change', 'blur'] }],
+
+        urgencyMan: [{
+          required: true,
+          message: '请输入紧急联系人姓名',
+          trigger: ['change', 'blur'] }],
+
+        relevant: [{
+          required: true,
+          message: '请输入与请假人关系',
+          trigger: ['change', 'blur'] }],
+
+        urgencyManPhoneNumber: [{
+          required: true,
+          message: '请输入紧急联系人电话',
+          trigger: ['change', 'blur'] }],
+
+        qq: [{
+          required: true,
+          message: '请输入本人qq号',
+          trigger: ['change', 'blur'] }],
+
+        phoneNumber: [{
+          required: true,
+          message: '请输入本人电话号码',
+          trigger: ['change', 'blur'] }],
+
+        wx: [{
+          required: true,
+          message: '请输入本人微信号码',
+          trigger: ['change', 'blur'] }] },
+
+
+      buttonStyle: {
+        marginRight: '40px' // 注意驼峰命名，并且值必须用引号包括，因为这是对象
+      },
+      radioList: [{
+        name: '是',
         disabled: false },
 
+      {
+        name: '否',
+        disabled: false }],
+
+
+      radioList2: [{
+        name: '是',
+        disabled: false },
+
+      {
+        name: '否',
+        disabled: false }],
+
+
+      radioList3: [{
+        name: '飞机',
+        disabled: false },
+
+      {
+        name: '火车',
+        disabled: false },
+
+      {
+        name: '其他',
+        disabled: false }],
+
+
+      radioList4: [{
+        name: '实习',
+        disabled: false },
       {
         name: '返家',
-        checked: false,
         disabled: false },
-
       {
         name: '旅游',
-        checked: false,
         disabled: false },
       {
         name: '病假',
-        checked: false,
         disabled: false },
       {
         name: '事假',
-        checked: false,
         disabled: false },
       {
         name: '医学南校区',
-        checked: false,
         disabled: false },
       {
         name: '其他',
-        checked: false,
         disabled: false },
       {
         name: '毕业离校',
-        checked: false,
         disabled: false },
       {
         name: '寒暑假离家',
-        checked: false,
         disabled: false }],
-
-
-      radioList: [{
-        name: '鲜甜',
-        disabled: false },
-
-      {
-        name: '麻辣',
-        disabled: false }],
-
 
       radio: '',
+      radio2: '',
+      radio3: '',
+      radio4: '',
       switchVal: false };
 
+  },
+  onLoad: function onLoad(res) {
+    var that = this;
+    setInterval(function () {
+      uni.setStorageSync('startTime', that.startTime);
+      uni.setStorageSync('endTime', that.endTime);
+      uni.setStorageSync('destination', that.destination);
+      uni.setStorageSync('number', that.number);
+      uni.setStorageSync('onTheWay', that.onTheWay);
+      uni.setStorageSync('carStarTime', that.carStartTime);
+      uni.setStorageSync('carEndTime', that.carEndTime);
+      uni.setStorageSync('urgencyMan', that.urgencyMan);
+      uni.setStorageSync('relevant', that.relevant);
+      uni.setStorageSync('urgencyManPhoneNumber', that.urgencyManPhoneNumber);
+      uni.setStorageSync('qq', that.qq);
+      uni.setStorageSync('phoneNumber', that.phoneNumber);
+      uni.setStorageSync('wx', that.wx);
+      uni.setStorageSync('happen', that.happen);
+      uni.setStorageSync('goout', that.radio);
+      uni.setStorageSync('outLan', that.radio2);
+      uni.setStorageSync('vehicle', that.radio3);
+      uni.setStorageSync('Type', that.radio4);
+    }, 2000);
+  },
+  onShow: function onShow() {
+    this.startTime = uni.getStorageSync('startTime');
+    this.endTime = uni.getStorageSync('endTime');
+    this.destination = uni.getStorageSync('destination');
+    this.number = uni.getStorageSync('number');
+    this.onTheWay = uni.getStorageSync('onTheWay');
+    this.carStartTime = uni.getStorageSync('carStartTime');
+    this.carEndTime = uni.getStorageSync('carEndTime');
+    this.urgencyMan = uni.getStorageSync('urgencyMan');
+    this.urgencyManPhoneNumber = uni.getStorageSync('urgencyManPhoneNumber');
+    this.qq = uni.getStorageSync('qq');
+    this.phoneNumber = uni.getStorageSync('phoneNumber');
+    this.wx = uni.getStorageSync('wx');
+    this.happen = uni.getStorageSync('happen');
+    this.radio = uni.getStorageSync('goout');
+    this.radio2 = uni.getStorageSync('outLan');
+    this.radio3 = uni.getStorageSync('vehicle');
+    this.radio4 = uni.getStorageSync('Typed');
+  },
+  methods: {
+    // 选中某个单选框时，由radio时触发
+    radioGroupChange: function radioGroupChange(e) {
+      console.log(e);
+    },
+    radio2GroupChange: function radio2GroupChange(r) {
+      console.log(r);
+    },
+    radio3GroupChange: function radio3GroupChange(t) {
+      console.log(t);
+    },
+    radio4GroupChange: function radio4GroupChange(y) {
+      console.log(y);
+    },
+    submit: function submit() {var _this = this;
+      if (this.switchVal == true) {
+        this.$refs.uForm.validate(function (valid) {
+          if (valid) {
+            console.log('验证通过');
+            var that = _this;
+            uni.request({
+              url: '',
+              method: 'POST',
+              data: {
+                startTime: that.startTime,
+                endTime: that.endTime,
+                destination: that.destination,
+                number: that.number,
+                onTheWay: that.onTheWay,
+                carStartTime: that.carStartTime,
+                carEndTime: that.carEndTime,
+                urgencyMan: that.urgencyMan,
+                relevant: that.relevant,
+                urgencyManPhoneNumber: that.urgencyManPhoneNumber,
+                qq: that.qq,
+                phoneNumber: that.phoneNumber,
+                wx: that.wx,
+                happen: that.happen,
+                goout: that.radio,
+                outLan: that.radio2,
+                vehicle: that.radio3,
+                Type: that.radio4 },
+
+              success: function success(res) {
+                if (res.data.status_code == 100) {
+                  uni.showToast({
+                    title: '提交成功' });
+
+                } else {
+                  uni.showToast({
+                    title: '提交失败，请稍后重试' });
+
+                }
+              } });
+
+          } else {
+            console.log('验证失败');
+            _this.switchVal = false;
+          }
+        });
+      } else {
+        console.log('请勾选同意');
+      }
+    } },
+
+  onReady: function onReady() {
+    this.$refs.uForm.setRules(this.rules);
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
