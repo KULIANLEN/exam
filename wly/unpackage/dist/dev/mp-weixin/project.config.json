@@ -13,7 +13,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "2.26.0",
+  "libVersion": "2.26.1",
   "appid": "touristappid",
   "projectname": "9.15作业",
   "condition": {},

@@ -28,6 +28,6 @@
 	display: flex;
 	flex-wrap: nowrap;
 }.radio{
-	margin-right: 20rpx;
+	margin-right: 180rpx;
 }
 
